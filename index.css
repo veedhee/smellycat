@@ -1,0 +1,102 @@
+body, *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+    height: 50vh;
+    width: 100vw;
+    background: black;
+    position: relative;
+}
+
+header div{
+    color: white;
+    padding: 10px 30px;
+    border: 2px solid white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    text-align: center;
+    letter-spacing: 0.2em;
+    transition: all 500ms;
+}
+
+header div:hover{
+    font-size: 32px;
+}
+
+header ul{
+    list-style: none;
+    text-align: center;
+    margin: 0;
+    padding-top: 20px;
+}
+
+header ul li{
+    color: white;
+    display: inline;
+    padding: 10px;
+    text-align: center;
+    font-family: Verdana;
+}
+
+header ul li a{
+    color: white;
+    text-decoration: none;
+}
+
+#contents{
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction:row;
+    justify-content: space-between;
+}
+
+#contents > div{
+    height: 50vh;
+    flex: 50%;
+    max-width: 50%;
+    padding: 5px 10px;
+}
+
+#contents > div h2{
+    padding: 15px 0px;
+    font-family: 'Kaushan Script', cursive;
+    text-align: center;
+}
+
+#contents div a{
+    text-align: center;
+    margin: 10px;
+    display: block;
+    background: black;
+    padding: 5px 10px;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+#about, #composer{
+    width: 80vw;
+    margin: auto;
+    text-align: center;
+}
+
+#about h2, #composer h2{
+    padding: 20px;
+    font-family: 'Kaushan Script', cursive;
+}
+
+p{
+    line-height: 1.3em;
+    font-family: 20px;
+}
+
+p a{
+  color: red;
+  text-decoration: none;
+}

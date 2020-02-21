@@ -1,0 +1,79 @@
+
+:root {
+    --noRows: 8;
+    --noCols: 8;
+    --gridHeight: 50px;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    width: 100%;
+    padding: 20px 0;
+    background-color: #9aeff4;
+    color: #0a595e;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 900;
+    font-family: 'Kaushan Script', cursive;
+}
+
+#player{
+    display: grid;
+    grid-template-columns: repeat(var(--noCols), auto);
+    grid-template-rows: repeat(var(--noRows), var(--gridHeight));
+    margin: auto;
+    width: 80vw;
+}
+
+#player div.notes{
+    outline: 6px inset #06373a;
+    transition: all 500ms;
+    background: #befcff;
+}
+
+#player div.notes:hover{
+    background: #d6f9fc;
+}
+
+#player div.selected:hover{
+    background: #f385b7;
+}
+
+#player div.selected{
+    background: #ea428d;
+    outline: 6px inset #b6145c;
+    
+}
+
+#player .notes.playing{
+    background: #e4fbfd;
+}
+
+#player .notes.selected.playing{
+    background: #f396c0;
+}
+
+#buttons{
+    margin: 10px;
+    text-align: center;
+}
+
+#buttons button{
+    background: #06373a;
+    color: #cff7fa;
+    border: 2px solid #06373a;
+    padding: 10px 10px;
+    font-size: 20px;
+    border-radius: 7px;
+    transition: all 300ms;
+    margin: 4px;
+}
+
+#buttons button:hover{
+    background: #cff7fa;
+    color: #06373a;
+}

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script&display=swap" rel="stylesheet"> 
+
+
+    <title>Eenie Minnie MIDI Mo</title>
+
+
+    <style>
+      body{
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    width: 100%;
+    padding: 20px 0;
+    background-color: rgb(252, 49, 49);
+    color: black;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 900;
+    font-family: 'Kaushan Script', cursive;
+}
+
+.main{
+    text-align: center;
+}
+
+.instructions{
+    margin: 0 auto;
+    border: 3px solid black;
+    border-left: 8px solid red;
+    border-top: 8px solid red;
+    border-radius: 30px 0px 30px 0px;
+    position: relative;
+    padding: 20px 50px;
+    display: inline-block;
+    margin: 10px 0;
+    text-align: left;
+}
+
+textarea{
+    outline: none;
+    border-bottom: 10px solid red;
+    border-top: 10px solid black;
+    border-left: none;
+    border-right: none;
+    height: 200px;
+    width: 90vw;
+    display: block;
+    margin: auto;
+}
+
+button{
+    margin-top: 20px;
+    background: linear-gradient(to right, red, black);
+    color: white;
+    padding: 10px 20px;
+    transition: all 500ms;
+    display: block;
+    margin: auto;
+}
+
+button:hover{
+    background: linear-gradient(to right, black, red);
+}
+      </style>
+</head>
+<body>
+    <header>Eenie Minnie MIDI Mo</header>
+    <div class="main">
+    <div class="instructions">
+        <p>
+            Enter text below. Can include:
+            <ul>
+                <li>Lower Case Characters</li>
+                <li>Upper case characters</li>
+                <li>Digits</li>
+                <li>Space</li>
+                <li>Special Characters ( . , ! @ # %)</li>
+            </ul>
+            Click "Convert to Music" to listen to what the particular text sounds like. Type in random words, mix up upper case and lower case,
+            just try whatever you want to. Tip: wanna try what your full name sounds like first?
+        </p>
+        </div>
+    </div>
+    <textarea maxlength="200" placeholder="Enter your musical text here...(lorem ipsum, anyone?)"></textarea>
+    <button class="a">Convert to Music</button>
+    <script>
+
+window.AudioContext = window.AudioContext||window.webkitAudioContext;
+  let  context = new AudioContext();
+  let osc = context.createOscillator();
+  let notes_play = [];
+  let ind = 0.5;
+  let songBuffer = {};
+  let songBufferSigns = ['.', ',', '!', '@', '#', '%'];
+  let buffer_ind = 0;
+  loadSound('./clap1.wav');
+  loadSound('./clap2.mp3');
+  loadSound('./click.wav');
+  loadSound('./snap.wav');
+  loadSound('./snare.wav');
+  loadSound('./thud.wav');
+
+//osc.frequency.value = 440;
+
+        var notes = {"a": 440, "b": 350, "c": 460, "d": 470, "e": 376.45, "f": 400.87,"g": 612.32, "h": 444, "i": 297, "j": 365.12, "k": 130, "l": 123.47, "m": 532.54, "n": 146.83, "o": 220,"p":  415.30, "q": 880,"r": 587.33, "s": 783.99, "t": 622.25, "u": 311.13, "v": 329.63, "w": 276, "x": 445, "y": 553.21,"z": 654, "1": 81.98, "2": 87.98, "3": 94.98, "4": 100.98, "5":376, "6": 382, "7": 400, "8": 408, "9": 550, "0": 560};
+           var text = "abcd";
+           
+document.querySelector(".a").onclick = function(){
+
+            text = document.querySelector("textarea").value;
+           for(var i in text)
+           {
+               ind += 0.5;
+                if(text[i] >= "A" && text[i] <= "Z")
+                {
+                osc.frequency.linearRampToValueAtTime(notes[text[i].toLowerCase()], context.currentTime + ind);
+                }
+                else if(text[i] >="a" && text[i] <="z")
+                {
+                    osc.frequency.setValueAtTime(notes[text[i]], context.currentTime + ind);
+                }
+                else if(text[i] >="0" && text[i] <="9")
+                {
+                    osc.frequency.setValueAtTime(notes[text[i]], context.currentTime + ind);
+                }
+                else if(text[i] == " ")
+                {
+                    continue;
+                }
+                else if(text[i] == "." || text[i] == "," || text[i] == "!" || text[i] == "@" || text[i] == "#" || text[i] == "%")
+                {
+
+                    playSound(songBuffer[text[i]], ind);
+                }
+                else{
+                    ind -= 0.5;
+                }
+           }
+
+           osc.connect(context.destination);
+           osc.start();
+           osc.stop(context.currentTime + ind);
+}
+           
+function loadSound(url) {
+  var request = new XMLHttpRequest();
+  request.open('GET', url, true);
+  request.responseType = 'arraybuffer';
+
+  request.onload = function() {
+    context.decodeAudioData(request.response, function(buffer) {
+      songBuffer[songBufferSigns[buffer_ind]] = buffer;
+      buffer_ind += 1;
+    }, onError);
+  }
+  request.send();
+}
+
+function playSound(buffer, ind) {
+  var source = context.createBufferSource(); 
+  source.buffer = buffer;                 
+  source.connect(context.destination);       
+  source.start(context.currentTime + ind);                                                                      
+}
+
+function onError(){
+    console.log("error happened :(");
+}
+
+    </script>
+</body>
+</html>

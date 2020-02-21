@@ -1,0 +1,129 @@
+body, *{
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    width: 100%;
+    padding: 20px 0;
+    background: linear-gradient(to bottom right, #77a4d9, #2e5077);
+    text-shadow: #2e5077;
+    color: black;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 900;
+    font-family: 'Kaushan Script', cursive;
+}
+
+.main{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 2em;
+}
+
+#song_name{
+    text-align: center;
+    width: 50%;
+    align-self: flex-start;
+}
+
+#song_info{
+    width: 50%;
+    align-self: flex-start;
+}
+
+#song_name span{
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    border-left: 1px solid rgb(204, 203, 203);
+    border-right: 1px solid rgb(204, 203, 203);
+    margin: 5px;
+    font-size: 40px;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.correct
+{
+    background: linear-gradient(to bottom right, rgb(111, 245, 111), rgb(63, 212, 63));
+    color: black;
+}
+
+#song_info div{
+    font-family: Verdana;
+    font-size: 22px;
+    background: linear-gradient(to right, #7298c7, #254872);
+    color: white;
+    padding: 5px 15px;
+    margin: 5px;
+}
+
+input{
+    background: #77a4d9;
+    color: black;
+    border: none;
+    border-bottom: 3px solid black;
+    height: 1.5em;
+    border-radius: 50%;
+    text-align: center;
+}
+
+#song_info #inp, #song_info .hint, #song_info .chances{
+    background: linear-gradient(to right, #254872, #7298c7);
+}
+
+button{
+    background: black;
+    color: white;
+    padding: 5px 20px;
+    border: navy;
+    border-radius: 10px;
+}
+
+.space{
+    height: 40px;
+}
+
+.border-black{
+    border-bottom: 15px solid black;
+}
+
+.border-gray{
+    border-bottom: 15px solid gray;
+}
+
+@media screen and (max-width: 680px) {
+   #song_info, #song_name
+   {
+       width: 100%;
+   }
+
+   header{
+     font-size: 40px;
+   }
+
+   #inp{
+    position: fixed;
+    bottom: 0;
+  }
+
+  #song_name span{
+    width: 50px;
+    height: 50px;
+  }
+
+   #inp{
+    font-size: 20px;
+  }
+  #song_info .answer{
+    margin-bottom: 80px;
+  }
+
+  #inp{
+    font-size: 20px;
+  }
+
+  }
+
+  
